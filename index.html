@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="videoApp">
 <head>
 	<meta charset="UTF-8">
 	<title>Angular JS Video Player Playback</title>
 <!-- angular js framework -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
+<script src="js/videoApp.js"></script>
 
 <!-- load up bootstrap CSS from CDN -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -17,7 +18,7 @@
 <link rel="stylesheet" href="css/mystyle.css">
 
 </head>
-<body>
+<body ng-controller="VideoController">
 
 <div class="container">
 	<div class="row">
@@ -27,13 +28,10 @@
 			<video src="video/StarlightScamper.mp4" id="myvideo"></video>
 		</div>
 
-		<div class="btn-group btn-group-justified" role="group">
-			<a onclick="playVideo()" class="btn btn-default">Play</a>
-			<a onclick="pauseVideo()" class="btn btn-default">Pause</a>
-			<a onclick="stopVideo()" class="btn btn-default">Stop</a>
-		</div>
 	</div>
 	</div>
+	{{ message }}
+
 </div>
 
 
@@ -44,7 +42,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <!-- load up bootstrap JS from CDN -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- add video controls. this may get moved later -->
-<script src="js/videoControls.js"></script>
+
 </body>
 </html>
