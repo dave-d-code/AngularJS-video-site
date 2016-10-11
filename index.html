@@ -21,17 +21,22 @@
 <body ng-controller="VideoController">
 
 <div class="container">
-	<div class="row">
-		<div class="col-lg-8">
-		<h2 class="lead text-center">Presentation</h2>
-		<div class="embed-responsive embed-responsive-16by9">
-			<video src="video/StarlightScamper.mp4" id="myvideo"></video>
-		</div>
+<!-- special bootstrap and angular class div -->
+<div id="fullPlayer" class="unselectable ng-cloak">
 
+	<h2 class="lead text-center">Presentation</h2>
+	<div class="embed-responsive embed-responsive-16by9">
+		<video ng-src="{{videoSource}}" id="myvideo" ng-click="togglePlay()"></video>
+		<div id="bigPlayButton" class="well" ng-click="togglePlay()" ng-hide="videoPlaying"><span class="glyphicon glyphicon-play"></span></div>
+		<div id="videoTitle" ng-hide="videoPlaying">{{titleDisplay}}</div>
 	</div>
+	<div id="playerToolBar">
+		<a id="playBtn" class="btn btn-default" ng-click="togglePlay()"><span class="glyphicon glyphicon-play"></span></a>
+		<a id="muteBtn" class="btn btn-default" ng-click="toggleMute()"><span class="glyphicon glyphicon-volume-up"></span></a>
+		<span id="videoTime">00:00:00 / 00:00:00</span>
 	</div>
-	{{ message }}
 
+</div>
 </div>
 
 

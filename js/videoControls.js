@@ -1,5 +1,6 @@
 // basic js file for video control setup.
 // doesn't work with Jquery selectors, as you need to go thru the DOM.
+// not using this file anymore :-(
 
 var myVideo = document.getElementById('myvideo');
 
