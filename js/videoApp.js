@@ -3,7 +3,6 @@
 var videoApp = angular.module('videoApp', []); // if we had routes, they would go here
 
 // declare other vars here, instead of separate scripts. to be used in the HTML page like CodeIgniter
-// will comment out till i know where he is going with this
 // var videoSource = "video/StarlightScamper.mp4",
 // 	titleDisplay = "Starlight Scamper",
 // 	videoDescription = "Starlight Scamper: AngularJS project with video playback";
@@ -17,8 +16,30 @@ videoApp.controller('VideoController', ['$scope', function($scope) {
 	$scope.titleDisplay = "Starlight Scamper";
 	$scope.videoDescription = "Starlight Scamper: AngularJS project with video playback";
 	$scope.videoPlaying = false;
+	$scope.currentTime;
+	$scope.totalTime;
 
-	// 2 play functions for the scope.
+	$scope.initPlayer = function() {
+		$scope.currentTime = 0;
+		$scope.totalTime = 0;
+		$scope.videoDisplay.addEventListener("timeupdate", $scope.updateTime, true);
+		$scope.videoDisplay.addEventListener("loadedmetadata", $scope.updateData, true)
+	};
+
+	$scope.updateTime = function(e) {
+		$scope.currentTime = e.target.currentTime;
+		$scope.updateLayout();
+	};
+
+	$scope.updateData = function(e) {
+		$scope.totalTime = e.target.duration;
+	};
+
+	$scope.updateLayout = function() {
+		if (!$scope.$phase) {
+			$scope.$apply();
+		}
+	};
 
 	$scope.togglePlay = function() {
 		if ($scope.videoDisplay.paused) {
@@ -54,5 +75,7 @@ videoApp.controller('VideoController', ['$scope', function($scope) {
 		}
 	}; // end of toggleMute fun
 
+	// initialise the player
+	$scope.initPlayer();
 	
 }]); // end of controller function
