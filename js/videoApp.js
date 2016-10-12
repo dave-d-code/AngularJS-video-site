@@ -28,6 +28,14 @@ videoApp.controller('VideoController', ['$scope', function($scope) {
 
 	$scope.updateTime = function(e) {
 		$scope.currentTime = e.target.currentTime;
+		// if video reaches the end, reset to beginning
+		if ($scope.currentTime == $scope.totalTime) {
+			$scope.videoDisplay.pause();
+			$scope.videoPlaying = false;
+			$scope.currentTime = 0;
+			$('#playBtn').children('span').toggleClass("glyphicon-play", true);
+			$('#playBtn').children('span').toggleClass("glyphicon-pause", false);
+		}
 		$scope.updateLayout();
 	};
 
@@ -35,8 +43,9 @@ videoApp.controller('VideoController', ['$scope', function($scope) {
 		$scope.totalTime = e.target.duration;
 	};
 
+	// this will get replaced by interval in the module depenacies.
 	$scope.updateLayout = function() {
-		if (!$scope.$phase) {
+		if (!$scope.$$phase) { // stackoverflow says that this is bad to use $$phase
 			$scope.$apply();
 		}
 	};
@@ -79,3 +88,15 @@ videoApp.controller('VideoController', ['$scope', function($scope) {
 	$scope.initPlayer();
 	
 }]); // end of controller function
+
+// make your own angular filter
+
+videoApp.filter('time', function() {
+	return function(seconds) {
+		var hh = Math.floor(seconds/ 3600),
+			mm = Math.floor(seconds / 60) % 60,
+			ss = Math.floor(seconds) % 60;
+
+		return hh + ":" + (mm < 10 ? "0" : "") + mm + ":" + (ss < 10 ? "0" : "") + ss;
+	};
+});
